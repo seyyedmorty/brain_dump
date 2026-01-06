@@ -2,6 +2,7 @@ package com.example.braindump.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,7 +15,11 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(nav: NavController) {
+fun TopBar(
+    nav: NavController,
+    isMenuOpen: Boolean,
+    onMenuClick: () -> Unit,
+) {
     val navBackStackEntry = nav.currentBackStackEntry
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -22,10 +27,10 @@ fun TopBar(nav: NavController) {
         title = { },
         navigationIcon = {
             IconButton(
-                onClick = { }
+                onClick = onMenuClick
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = if (isMenuOpen) Icons.Default.Close else Icons.Filled.Menu,
                     contentDescription = "Menu",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )

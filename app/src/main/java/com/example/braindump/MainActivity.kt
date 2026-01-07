@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.braindump.ui.component.DoubleBack
 import com.example.braindump.ui.component.RadialMenu
 import com.example.braindump.ui.navigation.AppNavGraph
 import com.example.braindump.ui.navigation.Routes
@@ -46,6 +47,9 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier.fillMaxSize().padding(innerPadding)
                     ) {
+                        DoubleBack {
+                            finishAffinity()
+                        }
                         AppNavGraph(navController, Modifier.fillMaxSize())
 
                         RadialMenu(
@@ -54,13 +58,30 @@ class MainActivity : ComponentActivity() {
                             onItemClick = { index ->
                                 isMenuOpen = false
                                 when (index) {
-                                    0 -> navController.navigate(Routes.FAVORITE)
-                                    1 -> navController.navigate(Routes.SETTING)
-                                    2 -> navController.navigate(Routes.FEEDBACK)
-                                    3 -> navController.navigate(Routes.DUMP)
-                                    4 -> navController.navigate(Routes.HOME)
+                                    0 -> navController.navigate(Routes.FAVORITE) {
+                                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                    1 -> navController.navigate(Routes.SETTING) {
+                                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                    2 -> navController.navigate(Routes.FEEDBACK) {
+                                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                    3 -> navController.navigate(Routes.DUMP) {
+                                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
+                                    4 -> navController.navigate(Routes.HOME) {
+                                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                        launchSingleTop = true
+                                    }
                                 }
                             }
+
+
                         )
                     }
                 }

@@ -1,7 +1,6 @@
 package com.example.braindump.ui.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -13,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+
 
 val titleMap = mapOf(
     Routes.HOME to "داشبورد",
@@ -29,9 +30,8 @@ fun TopBar(
     isMenuOpen: Boolean,
     onMenuClick: () -> Unit,
 ) {
-    val navBackStackEntry = nav.currentBackStackEntry
-    val currentRoute = navBackStackEntry?.destination?.route
-
+    val navBackStackEntry = nav.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry.value?.destination?.route ?: Routes.HOME
     CenterAlignedTopAppBar(
         title = { Text(
             text = titleMap[currentRoute] ?: "سطل زباله ذهن",

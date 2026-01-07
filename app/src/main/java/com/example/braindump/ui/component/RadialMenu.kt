@@ -2,7 +2,6 @@ package com.example.braindump.ui.component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,27 +15,21 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -47,11 +40,11 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 
 val menuItems = listOf(
-    Icons.Default.Home,
     Icons.Default.Favorite,
     Icons.Default.Settings,
-    Icons.Default.Person,
-    Icons.Filled.Delete
+    Icons.Default.Star,
+    Icons.Filled.Delete,
+    Icons.Default.Home,
 )
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -122,8 +115,8 @@ fun RadialMenu(
                     shape = CircleShape,
                     color = MaterialTheme.colorScheme.primary,
                     onClick = {
-                        onItemClick(index)
                         onToggle()
+                        onItemClick(index)
                     }
                 ) {
                     // Box برای مرکز چین کردن آیکون

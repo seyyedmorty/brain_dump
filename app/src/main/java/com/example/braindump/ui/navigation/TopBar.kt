@@ -9,9 +9,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+
+val titleMap = mapOf(
+    Routes.HOME to "داشبورد",
+    Routes.DUMP to "سطل زباله",
+    Routes.FAVORITE to "نشان شده‌ها",
+    Routes.SETTING to "تنظیمات",
+    Routes.FEEDBACK to "بازخورد",
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +33,11 @@ fun TopBar(
     val currentRoute = navBackStackEntry?.destination?.route
 
     CenterAlignedTopAppBar(
-        title = { },
+        title = { Text(
+            text = titleMap[currentRoute] ?: "سطل زباله ذهن",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onPrimary
+        ) },
         navigationIcon = {
             IconButton(
                 onClick = onMenuClick
